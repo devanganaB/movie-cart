@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies/provider/movie_provider.dart';
+import 'package:movies/screens/fav_movies.dart';
 import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -24,6 +25,29 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          //the liked movies button
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton.icon(
+              //redirecting to a new page with list of liked mvoies
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => MyListScreenState(),
+                ));
+              },
+
+              icon: Icon(Icons.favorite),
+              label: Text(
+                "Go to my List (${myList.length})",
+                style: TextStyle(fontSize: 20),
+              ),
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.red,
+                  padding: EdgeInsets.symmetric(vertical: 20)),
+            ),
+          ),
+
+          //th elist of movies from provider
           Expanded(
               child: ListView.builder(
                   itemCount: movies.length,
