@@ -14,6 +14,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     var movies = context.watch<MovieProvider>().movies;
     //context.watch  from the 'provider package' to access the 'movies' property of the MovieProvider
+    var myList = context.watch<MovieProvider>().myList;
 
     return Scaffold(
       appBar: AppBar(
@@ -43,6 +44,26 @@ class _MyHomePageState extends State<MyHomePage> {
                           subtitle: Text(
                             currentMovie.duration ?? 'No information',
                             style: TextStyle(color: Colors.white),
+                          ),
+                          trailing: IconButton(
+                            icon: Icon(
+                              Icons.favorite,
+                              color: myList.contains(currentMovie)
+                                  ? Colors.red
+                                  : Colors.white,
+                              size: 30,
+                            ),
+                            onPressed: () {
+                              if (!myList.contains(currentMovie)) {
+                                context
+                                    .read<MovieProvider>()
+                                    .addToList(currentMovie);
+                              } else {
+                                context
+                                    .read<MovieProvider>()
+                                    .removeFromList(currentMovie);
+                              }
+                            },
                           ),
                         ),
                       ),
