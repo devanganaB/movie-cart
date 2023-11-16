@@ -5,7 +5,9 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
-      child: const MyApp(), create: (_) => MovieProvider()));
+    create: (_) => MovieProvider(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -18,6 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Movie Cart',
       theme: ThemeData(
+        primarySwatch: Colors.blue,
         brightness: Brightness.dark,
         useMaterial3: true,
       ),

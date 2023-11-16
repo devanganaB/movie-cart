@@ -12,7 +12,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    var Movies = context.watch<MovieProvider>().movies;
+    var movies = context.watch<MovieProvider>().movies;
     //context.watch  from the 'provider package' to access the 'movies' property of the MovieProvider
 
     return Scaffold(
@@ -23,25 +23,31 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ListView.builder(
-              itemCount: Movies.length,
-              itemBuilder: (_, index) {
-                final currentMovie = Movies[index];
-                return Card(
-                  key: ValueKey(currentMovie.title),
-                  color: Colors.cyan,
-                  child: ListTile(
-                    title: Text(
-                      currentMovie.title,
-                      style: TextStyle(fontSize: 24, color: Colors.white),
-                    ),
-                    subtitle: Text(
-                      currentMovie.duration ?? 'No information',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                );
-              })
+          Expanded(
+              child: ListView.builder(
+                  itemCount: movies.length,
+                  itemBuilder: (_, index) {
+                    final currentMovie = movies[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 2.0),
+                      child: Card(
+                        key: ValueKey(currentMovie.title),
+                        color: Colors.blue,
+                        elevation: 2,
+                        child: ListTile(
+                          title: Text(
+                            currentMovie.title,
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                          subtitle: Text(
+                            currentMovie.duration ?? 'No information',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    );
+                  })),
         ],
       ),
     );
